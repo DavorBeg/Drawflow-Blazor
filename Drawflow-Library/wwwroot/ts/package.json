@@ -1,0 +1,14 @@
+{
+  "name": "drawflow",
+  "version": "1.0.0",
+  "description": "Using types for drawflow instead of min.js",
+  "main": "DrawflowBlazorProxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/drawflow": "^0.0.10"
+  }
+}

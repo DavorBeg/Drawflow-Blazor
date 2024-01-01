@@ -1,14 +1,19 @@
+
 import Drawflow, { DrawflowNode } from "drawflow";
+import './index.main.less';
 import { draflowOptions } from "./drawflowOptions";
+
+
 
 export let GlobalEditor: Drawflow | undefined = undefined;
 
-export function CreateDrawflow(proxyID: number, ID: HTMLElement, options: draflowOptions): boolean
+export function CreateDrawflow(ID: string, options: draflowOptions): boolean
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
-        GlobalEditor = new Drawflow(ID);
-
+        let htmlElement = document.getElementById(ID)
+        if(htmlElement == undefined) throw new Error("element with given id does not exist.")
+        GlobalEditor = new Drawflow(htmlElement!);
+        
         // draflow options
         GlobalEditor.reroute = options.reroute;
         GlobalEditor.reroute_curvature = options.reroute_curvature;
@@ -26,18 +31,17 @@ export function CreateDrawflow(proxyID: number, ID: HTMLElement, options: draflo
         GlobalEditor.zoom_last_value = options.zoom_last_value;
         GlobalEditor.draggable_inputs = options.draggable_inputs;
         GlobalEditor.useuuid = options.useuuid;
-
-
+        GlobalEditor.start();
+        console.log(GlobalEditor)
         return true;
     } catch (error) {
         return false;
     }
 }
 
-export function ChangeModule(proxyID: number, moduleName: string): boolean
+export function ChangeModule(moduleName: string): boolean
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         GlobalEditor.changeModule(moduleName);
         return true;
@@ -48,10 +52,9 @@ export function ChangeModule(proxyID: number, moduleName: string): boolean
     }
 }
 
-export function AddModule(proxyID: number, moduleName: string): boolean
+export function AddModule(moduleName: string): boolean
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         GlobalEditor.addModule(moduleName);
         return true;
@@ -65,7 +68,6 @@ export function AddModule(proxyID: number, moduleName: string): boolean
 export function RemoveModule(proxyID: number, moduleName: string): boolean
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         GlobalEditor.removeModule(moduleName);
         return true;
@@ -76,8 +78,7 @@ export function RemoveModule(proxyID: number, moduleName: string): boolean
     }
 }
 
-export function AddNode(proxyID: number,
-                        name: string, 
+export function AddNode(name: string, 
                         inputs: number, 
                         outputs: number, 
                         pos_x: number, 
@@ -89,7 +90,6 @@ export function AddNode(proxyID: number,
                         {
 
                             try {
-                                if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
                                 if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
                                 GlobalEditor.addNode(name, inputs, outputs, pos_x, pos_y, classes, data, html, typenode);
                                 return true;
@@ -104,7 +104,6 @@ export function AddNode(proxyID: number,
 export function ZoomIn(proxyID: number)
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         GlobalEditor.zoom_in();
         return true;
@@ -115,10 +114,9 @@ export function ZoomIn(proxyID: number)
     }
 }
 
-export function ZoomOut(proxyID: number)
+export function ZoomOut()
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         GlobalEditor.zoom_out();
         return true;
@@ -129,10 +127,9 @@ export function ZoomOut(proxyID: number)
     }
 }
 
-export function GetNodeFromId(proxyID: number, nodeID: number): DrawflowNode | undefined
+export function GetNodeFromId(nodeID: number): DrawflowNode | undefined
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.getNodeFromId(nodeID)
         
@@ -143,10 +140,9 @@ export function GetNodeFromId(proxyID: number, nodeID: number): DrawflowNode | u
     }
 }
 
-export function GetNodeFromName(proxyID: number, nodeName: string): number[]
+export function GetNodeFromName(nodeName: string): number[]
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.getNodesFromName(nodeName);
         
@@ -157,10 +153,9 @@ export function GetNodeFromName(proxyID: number, nodeName: string): number[]
     }
 }
 
-export function RemoveNodeId(proxyID: number, nodeID: number): void
+export function RemoveNodeId(nodeID: number): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.removeNodeId(nodeID);
         
@@ -171,10 +166,9 @@ export function RemoveNodeId(proxyID: number, nodeID: number): void
     }
 }
 
-export function UpdateNodeDataFromId(proxyID: number, nodeID: number | string, data: object): void
+export function UpdateNodeDataFromId(nodeID: number | string, data: object): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.updateNodeDataFromId(nodeID, data);
         
@@ -185,10 +179,9 @@ export function UpdateNodeDataFromId(proxyID: number, nodeID: number | string, d
     }
 }
 
-export function AddNodeInput(proxyID: number, nodeID: number | string): void
+export function AddNodeInput(nodeID: number | string): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.addNodeInput(nodeID);
         
@@ -200,10 +193,9 @@ export function AddNodeInput(proxyID: number, nodeID: number | string): void
 }
 
 
-export function AddNodeOutput(proxyID: number, nodeID: number | string): void
+export function AddNodeOutput(nodeID: number | string): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.addNodeOutput(nodeID);
         
@@ -215,10 +207,9 @@ export function AddNodeOutput(proxyID: number, nodeID: number | string): void
 }
 
 
-export function RemoveNodeInput(proxyID: number, nodeID: number | string, input_class: string): void
+export function RemoveNodeInput(nodeID: number | string, input_class: string): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.removeNodeInput(nodeID, input_class);
         
@@ -229,10 +220,9 @@ export function RemoveNodeInput(proxyID: number, nodeID: number | string, input_
     }
 }
 
-export function RemoveNodeOutput(proxyID: number, nodeID: number | string, input_class: string): void
+export function RemoveNodeOutput(nodeID: number | string, input_class: string): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.removeNodeOutput(nodeID, input_class);
         
@@ -243,11 +233,9 @@ export function RemoveNodeOutput(proxyID: number, nodeID: number | string, input
     }
 }
 
-export function AddConnection(proxyID: number,
-    id_output: number | string, id_input: number | string, output_class: string, input_class: string): void
+export function AddConnection(id_output: number | string, id_input: number | string, output_class: string, input_class: string): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.addConnection(id_output, id_input, output_class, input_class);
         
@@ -258,11 +246,9 @@ export function AddConnection(proxyID: number,
     }
 }
 
-export function RemoveSingleConnection(proxyID: number,
-    id_output: number | string, id_input: number | string, output_class: string, input_class: string): void
+export function RemoveSingleConnection(id_output: number | string, id_input: number | string, output_class: string, input_class: string): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.removeSingleConnection(id_output, id_input, output_class, input_class);
         
@@ -273,10 +259,9 @@ export function RemoveSingleConnection(proxyID: number,
     }
 }
 
-export function UpdateConnectionNodes(proxyID: number, nodeID: string | number): void
+export function UpdateConnectionNodes(nodeID: string | number): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.updateConnectionNodes(nodeID);
         
@@ -288,10 +273,9 @@ export function UpdateConnectionNodes(proxyID: number, nodeID: string | number):
 }
 
 
-export function RemoveConnectionNodes(proxyID: number, nodeID: string | number): void
+export function RemoveConnectionNodes(nodeID: string | number): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.removeConnectionNodeId(nodeID);
         
@@ -302,10 +286,9 @@ export function RemoveConnectionNodes(proxyID: number, nodeID: string | number):
     }
 }
 
-export function GetModuleFromNodeId(proxyID: number, nodeID: string | number): string | undefined
+export function GetModuleFromNodeId(nodeID: string | number): string | undefined
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.getModuleFromNodeId(nodeID);
         
@@ -316,10 +299,9 @@ export function GetModuleFromNodeId(proxyID: number, nodeID: string | number): s
     }
 }
 
-export function ClearModuleSelected(proxyID: number, nodeID: string | number): void
+export function ClearModuleSelected(): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.clearModuleSelected();
         
@@ -330,10 +312,9 @@ export function ClearModuleSelected(proxyID: number, nodeID: string | number): v
     }
 }
 
-export function Clear(proxyID: number, nodeID: string | number): void
+export function Clear(): void
 {
     try {
-        if(typeof proxyID !== 'number') throw new Error("proxyID must be type of Number.");
         if(GlobalEditor == undefined) throw new Error("Global editor is undefined. First create drawflow editor.")
         return GlobalEditor.clear();
         

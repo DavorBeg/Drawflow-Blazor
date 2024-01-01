@@ -12,6 +12,7 @@
     "@types/drawflow": "^0.0.10"
   },
   "dependencies": {
-    "@types/blazor__javascript-interop": "^3.1.7"
+    "@types/blazor__javascript-interop": "^3.1.7",
+    "drawflow": "^0.0.59"
   }
 }

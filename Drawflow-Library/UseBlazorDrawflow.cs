@@ -12,7 +12,7 @@ namespace Drawflow_Library
 	{
 		public static IServiceCollection UseDrawflowBlazor(this IServiceCollection services)
 		{
-			return services.AddScoped<FlowJSMain>();
+			return services.AddScoped<Drawflow>();
 		}
     }
 }

@@ -2,26 +2,26 @@ import { ConnectionEvent, ConnectionStartEvent, MousePositionEvent } from 'drawf
 import { GlobalEditor as editor }  from './drawflowProxy'
 
 
-editor?.on('nodeCreated', function(id) {
+editor?.on('nodeCreated', function(id: any) {
     DotNet.invokeMethod("Drawflow-Library", "nodeCreated", id);
 });
 
 
-editor?.on('nodeRemoved', function(id) {
+editor?.on('nodeRemoved', function(id: any) {
     DotNet.invokeMethod("Drawflow-Library", "nodeRemoved", id);
 });
 
-editor?.on('nodeSelected', function(id) {
+editor?.on('nodeSelected', function(id: any) {
     DotNet.invokeMethod("Drawflow-Library", "nodeSelected", id);
 });
 
 
-editor?.on('nodeUnselected', function(IsUnselected) {
+editor?.on('nodeUnselected', function(IsUnselected: boolean) {
     DotNet.invokeMethod("Drawflow-Library", "nodeUnselected", IsUnselected);
 });
 
 
-editor?.on('nodeMoved', function(id) {
+editor?.on('nodeMoved', function(id: any) {
     DotNet.invokeMethod("Drawflow-Library", "nodeMoved", id);
 });
 
@@ -31,7 +31,7 @@ editor?.on('connectionStart', function(event: ConnectionStartEvent) {
 });
 
 
-editor?.on('connectionCancel', function(isCanceled) {
+editor?.on('connectionCancel', function(isCanceled: boolean) {
     DotNet.invokeMethod("Drawflow-Library", "connectionCancel", isCanceled);
 });
 

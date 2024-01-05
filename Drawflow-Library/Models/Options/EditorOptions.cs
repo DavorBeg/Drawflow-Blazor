@@ -24,6 +24,7 @@ namespace Drawflow_Library.Models.Options
         public decimal zoom { get; set; } = 1;
         public decimal zoom_max { get; set; } = 1.6M;
         public decimal zoom_min { get; set; } = 0.5M;
+        public decimal zoom_value { get; set; } = 0.1M;
         public decimal zoom_last_value { get; set; } = 1M;
         public bool draggable_inputs { get; set; } = true;
         public bool useuuid { get; set; } = false;

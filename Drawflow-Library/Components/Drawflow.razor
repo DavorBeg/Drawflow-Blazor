@@ -1,0 +1,39 @@
+﻿@using Drawflow_Library.Models.Options
+@using Microsoft.JSInterop
+@using System.Diagnostics
+
+@inject IJSRuntime _runtime
+
+<h3>Drawflow</h3>
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = "drawflow";
+
+    [Parameter]
+    public string Style { get; set; } = string.Empty;
+
+    [Parameter]
+    public List<string>? Classes { get; set; } = null;
+
+    [Parameter]
+    public EditorOptions? Options { get; set; } = null;
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            if (this.Options == null) this.Options = new EditorOptions();
+            var result = await _runtime.InvokeAsync<bool>("CreateDrawflow", this.Id, this.Options, this.Style);
+            if (!result) throw new Exception("Javascript runtime returned false value (Drawflow instance was not created)");
+        }
+        catch(Exception ex)
+        {
+            #if DEBUG
+                Debug.WriteLine("ERROR: " + ex.Message);
+            #endif
+        }
+    }
+
+}

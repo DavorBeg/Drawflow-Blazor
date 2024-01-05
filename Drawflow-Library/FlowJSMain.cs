@@ -12,13 +12,15 @@ namespace Drawflow_Library
         public Drawflow(IJSRuntime _runtime)
         {
 			_module = new(() => _runtime.InvokeAsync<IJSObjectReference>("import", "./_content/Drawflow-Library/drawflowProxy.js").AsTask());
-
             _moduleEvents = new(() => _runtime.InvokeAsync<IJSObjectReference>("import", "./_content/Drawflow-Library/drawflowEvents.js").AsTask());
         }
 		public async ValueTask<bool> CreateDrawflow(string id, EditorOptions options)
 		{
-			var module = await _module.Value;
-            return await module.InvokeAsync<bool>("CreateDrawflow", id, options);
+			
+            var module = await _module.Value;
+            var result = await module.InvokeAsync<bool>("CreateDrawflow", id, options);
+			await _moduleEvents.Value;
+            return result;
         }
 		public async ValueTask DisposeAsync()
 		{

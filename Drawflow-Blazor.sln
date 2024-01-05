@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drawflow-Blazor", "Drawflow-Blazor\Drawflow-Blazor.csproj", "{44A87623-D3B3-466E-BFE5-03067B742A86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drawflow-Library", "Drawflow-Library\Drawflow-Library.csproj", "{4270A1D5-8F88-496B-A37A-2B4329B5FF45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drawflow-Library", "Drawflow-Library\Drawflow-Library.csproj", "{4270A1D5-8F88-496B-A37A-2B4329B5FF45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

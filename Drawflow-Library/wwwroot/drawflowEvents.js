@@ -60,9 +60,11 @@ editor === null || editor === void 0 ? void 0 : editor.on('mouseMove', function 
     DotNet.invokeMethod("Drawflow-Library", "mouseMove", event);
 });
 editor === null || editor === void 0 ? void 0 : editor.on('zoom', function (event) {
+    console.log(event);
     DotNet.invokeMethod("Drawflow-Library", "zoom", event);
 });
 editor === null || editor === void 0 ? void 0 : editor.on('translate', function (event) {
+    console.log('Translate x:' + event.x + ' y:' + event.y);
     DotNet.invokeMethod("Drawflow-Library", "translate", event);
 });
 editor === null || editor === void 0 ? void 0 : editor.on('import', function (event) {

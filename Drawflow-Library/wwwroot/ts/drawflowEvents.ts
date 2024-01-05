@@ -106,10 +106,12 @@ editor?.on('mouseMove', function(event: MousePositionEvent) {
 
 
 editor?.on('zoom', function(event: any) {
+    console.log(event)
     DotNet.invokeMethod("Drawflow-Library", "zoom", event);
 });
 
 editor?.on('translate', function(event: MousePositionEvent) {
+    console.log('Translate x:' + event.x + ' y:'+ event.y);
     DotNet.invokeMethod("Drawflow-Library", "translate", event);
 });
 
